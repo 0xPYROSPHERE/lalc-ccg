@@ -1,4 +1,5 @@
 function fixedGetJson(jsonUrl){
+    console.log("Requesting " + jsonUrl);
     return $.ajax({
         url: jsonUrl,
         type:"GET",
