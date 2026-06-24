@@ -286,14 +286,28 @@ var menu = {
     },
     loadTemplates: function () {
         var a = localization.getURL("menu.html");
-        $.get(loading.getURL(a), function (b, c, d) {
-            loading.analyzeModificationDate(a, d.getResponseHeader("Last-Modified")),
-                (menu.template = $(b).filter("#menuTemplate").html());
-            for (var e in menu.data)
-                menu.data[e].template = $(b)
-                    .filter("#" + e + "Template")
-                    .html();
-            menu.initTabs(), menu.initIscroll();
+        $.ajax({
+            url: loading.getURL(a),
+            type: "GET",
+            dataType: "html",
+            xhr: function () {
+                var xhr = jQuery.ajaxSettings.xhr();
+                var setRequestHeader = xhr.setRequestHeader;
+                xhr.setRequestHeader = function (name, value) {
+                    if (name == "X-Requested-With") return;
+                    setRequestHeader.call(this, name, value);
+                };
+                return xhr;
+            },
+            success: function (b, c, d) {
+                loading.analyzeModificationDate(a, d.getResponseHeader("Last-Modified")),
+                    (menu.template = $(b).filter("#menuTemplate").html());
+                for (var e in menu.data)
+                    menu.data[e].template = $(b)
+                        .filter("#" + e + "Template")
+                        .html();
+                menu.initTabs(), menu.initIscroll();
+            }, 
         });
     },
     open: function () {

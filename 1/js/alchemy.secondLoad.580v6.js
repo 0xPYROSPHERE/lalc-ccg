@@ -1,4 +1,4 @@
-function fixedGetJson(jsonUrl) {
+function fixedGetJson(jsonUrl, onSuccess) {
     console.log("Requesting " + jsonUrl);
     return $.ajax({
         url: jsonUrl,
@@ -13,6 +13,7 @@ function fixedGetJson(jsonUrl) {
             };
             return xhr;
         },
+        success: onSuccess
     });
 }
 function ElementInfoBox(a, b, c, d) {
