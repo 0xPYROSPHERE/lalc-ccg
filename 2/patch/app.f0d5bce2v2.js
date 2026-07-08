@@ -33,7 +33,7 @@
       , r = [];
     function o(t) {
         if (t == "popups") {
-            return "https://cdn.jsdelivr.net/gh/0xPYROSPHERE/lalc-ccg@main/patch/popups.c486b38e.js";
+            return "https://cdn.jsdelivr.net/gh/0xPYROSPHERE/lalc-ccg@main/2/patch/popups.c486b38e.js";
         }
         return c.p + "js/" + ({
             animations: "animations",
